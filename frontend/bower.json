@@ -1,0 +1,17 @@
+{
+  "name": "fountain-inject",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "^1.6.2",
+    "angular-ui-router": "1.0.0-beta.3",
+    "todomvc-app-css": "^2.0.6"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.6.2"
+  },
+  "overrides": {
+    "todomvc-app-css": {
+      "main": "index.css"
+    }
+  }
+}
