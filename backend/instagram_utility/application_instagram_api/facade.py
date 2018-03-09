@@ -13,13 +13,13 @@ imageio.plugins.ffmpeg.download()
 from InstagramAPI import InstagramAPI
 
 class MyInstagramAPI:
-    def __init__(self, username, password, user_id):
+    def __init__(self, username, password):
         self.username = username
         self.password = password
-        self.user_id = user_id
 
         self.api = InstagramAPI(self.username, self.password)
         self.api.login()
+        self.user_id = self.api.username_id
 
     def __getFollwxs(self, api_function):
         following = []

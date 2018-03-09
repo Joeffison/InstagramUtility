@@ -1,23 +1,35 @@
-<div class="instagram-login row">
-  <form class="col s12">
-    <div class="row center-align">
+<div class="row">
+  <div class="row center-align col s3" ng-if="vm.user === undefined">
 
-      <div class="input-field col s12">
-        <i class="material-icons prefix">account_circle</i>
-        <input id="username" type="text" class="validate">
-        <label for="username">Username</label>
-      </div>
-
-      <div class="input-field col s12">
-        <i class="material-icons prefix">visibility_off</i>
-        <input id="password" type="text" class="validate">
-        <label for="password">Password</label>
-      </div>
-
-      <button class="btn waves-effect waves-light" name="instagram-login"
-              type="submit">Login
-        <i class="material-icons right">send</i>
-      </button>
+    <div class="input-field col s12">
+      <i class="material-icons prefix">account_circle</i>
+      <input id="username" type="text" class="validate" ng-model="vm.username">
+      <label for="username">Username</label>
     </div>
-  </form>
+
+    <div class="input-field col s12">
+      <i class="material-icons prefix">visibility_off</i>
+      <input id="password" type="text" class="validate" ng-model="vm.pwd">
+      <label for="password">Password</label>
+    </div>
+
+    <!--button class="btn waves-effect waves-light" name="instagram-login"
+            ng-click="vm.login()">Login
+      <i class="material-icons right">send</i>
+    </button-->
+
+    <a class="waves-effect waves-light btn" ng-click="vm.login()">
+      Login
+      <i class="material-icons right">send</i>
+    </a>
+  </div>
+
+  <div class="row center-align col s4" ng-if="vm.user !== undefined">
+    <p>
+      {{vm.user.username}}
+    </p>
+    <p>
+      X posts {{vm.user.followers.length}} followers {{vm.user.followings.length}} following
+    </p>
+  </div>
 </div>

@@ -11,7 +11,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('home', {
       url: '/',
       templateUrl: 'app/controllers/home/home.html',
-      controller: 'HomeCtrl',
+      controller: 'HomeController',
       controllerAs: 'vm'
     });
 }
