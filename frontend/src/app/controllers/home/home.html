@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="row center-align col s3" ng-if="vm.user === undefined">
+  <div class="row center-align col s3">
 
     <div class="input-field col s12">
       <i class="material-icons prefix">account_circle</i>
@@ -22,14 +22,5 @@
       Login
       <i class="material-icons right">send</i>
     </a>
-  </div>
-
-  <div class="row center-align col s4" ng-if="vm.user !== undefined">
-    <p>
-      {{vm.user.username}}
-    </p>
-    <p>
-      X posts {{vm.user.followers.length}} followers {{vm.user.followings.length}} following
-    </p>
   </div>
 </div>

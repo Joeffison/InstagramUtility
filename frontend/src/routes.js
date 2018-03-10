@@ -14,4 +14,14 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       controller: 'HomeController',
       controllerAs: 'vm'
     });
+
+  $stateProvider
+    .state('profile', {
+      url: '/profile',
+      templateUrl: 'app/controllers/profile/profile.html',
+      controller: 'ProfileController',
+      controllerAs: 'vm',
+      params: { instaUser: null }
+    });
+
 }

@@ -1,4 +1,4 @@
-function HomeController(instagramAPIService, $timeout) {
+function HomeController(instagramAPIService, $state) {
   var vm = this;
 
   vm.username = '';
@@ -6,13 +6,13 @@ function HomeController(instagramAPIService, $timeout) {
 
   vm.login = function () {
     instagramAPIService.login(vm.username, vm.pwd, function (response) {
-      console.log(response);
-      vm.user = response.data
+      vm.user = response.data;
+      $state.go('profile', {instaUser: vm.user});
     });
   }
 
 }
 
 angular.module('app')
-  .controller('HomeController', ['instagramAPIService', '$timeout',
+  .controller('HomeController', ['instagramAPIService', '$state',
     HomeController]);

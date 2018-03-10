@@ -10,7 +10,7 @@ const conf = require('../conf/gulp.conf');
 gulp.task('styles', styles);
 
 function styles() {
-  return gulp.src(conf.path.src('index.scss'))
+  return gulp.src(conf.path.src('assets/styles/index.scss'))
     .pipe(sourcemaps.init())
     .pipe(sass({outputStyle: 'expanded'})).on('error', conf.errorHandler('Sass'))
     .pipe(postcss([autoprefixer()])).on('error', conf.errorHandler('Autoprefixer'))

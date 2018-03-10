@@ -1,0 +1,25 @@
+<div class="row center-align col s4" ng-if="vm.instaUser !== undefined">
+  <p>
+    {{vm.instaUser.username}}
+  </p>
+  <p>
+    X posts {{vm.instaUser.followers.length}} followers {{vm.instaUser.followings.length}} following
+  </p>
+
+  <div>
+    <span ng-click="vm.notifyChild(vm.actions.NOT_FOLLOWERS)">
+      {{vm.instaUser.notFollowers.length}} not followers
+    </span>
+    <span ng-click="vm.notifyChild(vm.actions.NOT_FOLLOWINGS)">
+      {{vm.instaUser.notFollowings.length}} not following
+    </span>
+  </div>
+
+  <instagram-user-list users="vm.instaUser.notFollowers" action-name="vm.actions.NOT_FOLLOWERS" title="'Not Followers'"
+                       parent-to-child-notification-registration="vm.notFollowersComponentRegistration(handler)">
+  </instagram-user-list>
+
+  <instagram-user-list users="vm.instaUser.notFollowings" action-name="vm.actions.NOT_FOLLOWINGS" title="'Not Following'"
+                       parent-to-child-notification-registration="vm.notFollowingsComponentRegistration(handler)">
+  </instagram-user-list>
+</div>
