@@ -4,44 +4,52 @@ import imageio
 
 imageio.plugins.ffmpeg.download()
 
-# import wave
-# import pafy
-# import os
-# import moviepy.editor as mpy
-# import datetime
-
 from InstagramAPI import InstagramAPI
 
 class MyInstagramAPI:
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
+  def __init__(self, username, password):
+    self.username = username
+    self.password = password
 
-        self.api = InstagramAPI(self.username, self.password)
-        self.api.login()
-        self.user_id = self.api.username_id
+    self.api = InstagramAPI(self.username, self.password)
+    self.api.login()
+    self.user_id = self.api.username_id
+    self.__clear()
 
-    def __getFollwxs(self, api_function):
-        following = []
-        next_max_id = True
-        while next_max_id:
-            # first iteration hack
-            if next_max_id == True: next_max_id = ''
-            _ = api_function(self.user_id, maxid=next_max_id)
-            following.extend(self.api.LastJson.get('users', []))
-            next_max_id = self.api.LastJson.get('next_max_id', '')
-        return following
+  def get_current_user_profile(self):
+    return {
+      'username': self.username,
+      'n_feed': len(self.getFeed()),
+      'n_followers': len(self.getFollowers()),
+      'followers': self.getFollowers(),
+      'n_followings': len(self.getFollowings()),
+      'followings': self.getFollowings()
+    }
 
-    def getFollowings(self):
-        return self.__getFollwxs(self.api.getUserFollowings)
+  def __clear(self):
+    self.feed = None
+    self.followers = None
+    self.followings = None
 
-    def getFollowers(self):
-        return self.__getFollwxs(self.api.getUserFollowers)
+  def getFeed(self):
+    if not self.feed:
+      self.feed = self.api.getTotalUserFeed(self.user_id)
+    return self.feed
 
-    @staticmethod
-    def getUsernames(users):
-        return [user['username'] for user in users]
+  def getFollowers(self):
+    if not self.followers:
+      self.followers = self.api.getTotalSelfFollowers()
+    return self.followers
 
-    @staticmethod
-    def getUserIDs(users):
-        return {user['username']: user['pk'] for user in users}
+  def getFollowings(self):
+    if not self.followings:
+      self.followings = self.api.getTotalSelfFollowings()
+    return self.followings
+
+  @staticmethod
+  def getUsernames(users):
+    return [user['username'] for user in users]
+
+  @staticmethod
+  def getUserIDs(users):
+    return {user['username']: user['pk'] for user in users}

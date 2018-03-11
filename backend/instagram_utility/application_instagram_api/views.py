@@ -22,16 +22,8 @@ def model_list(request):
     return JsonResponse(serializer.data, safe=False)
 
   elif request.method == 'POST':
-    try:
-      api = MyInstagramAPI(request.data['username'], request.data['password'])
-      data = {
-        'username': api.username,
-        'followers': api.getFollowers(),
-        'followings': api.getFollowings()
-      }
-      return JsonResponse(data, safe=False)
-    except:
-      return HttpResponse(status=status.HTTP_401_UNAUTHORIZED)
+    api = MyInstagramAPI(request.data['username'], request.data['password'])
+    return JsonResponse(data=api.get_current_user_profile(), safe=False)
   return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
 
