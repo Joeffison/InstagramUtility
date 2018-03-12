@@ -20,6 +20,19 @@ main {
   }
 }
 
+a {
+  circle-loader {
+    position: absolute;
+    top: 0;
+    left: 40%;
+  }
+}
+
+.loading {
+  opacity: 0.7;
+  cursor: default;
+}
+
 main-header {
   .progress {
     margin: 0 !important;

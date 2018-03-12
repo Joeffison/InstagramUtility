@@ -1,18 +1,19 @@
 function instagramUserListController(instagramAPIService, visualElementsService) {
   let vm = this;
 
-  this.$onInit = function() {
+  vm.$onInit = function () {
     this.parentToChildNotificationRegistration({
       handler: this.processParentNotification,
       actionName: this.actionName
     });
 
+    visualElementsService.hideProgressBar();
     angular.element('.modal').modal({
       complete: () => visualElementsService.hideProgressBar()
     });
   };
 
-  this.processParentNotification = function(parentValue) {
+  vm.processParentNotification = function (parentValue) {
     switch (parentValue.action) {
       case 'open':
         vm.isOpen = true;
@@ -28,15 +29,25 @@ function instagramUserListController(instagramAPIService, visualElementsService)
     }
   };
 
-  this.follow = (user) => instagramAPIService.follow([user], function (response) {
-    user.isFollowing = true;
-    visualElementsService.hideProgressBar();
-  });
+  vm.follow = function (user) {
+    user.metaIsLoading = true;
 
-  this.unfollow = (user) => instagramAPIService.unfollow([user], function (response) {
-    user.isFollowing = false;
-    visualElementsService.hideProgressBar();
-  });
+    instagramAPIService.follow([user], function (response) {
+      user.metaIsLoading = false;
+      user.isFollowing = true;
+      visualElementsService.hideProgressBar();
+    });
+  };
+
+  vm.unfollow = function (user) {
+    user.metaIsLoading = true;
+
+    instagramAPIService.unfollow([user], function (response) {
+      user.metaIsLoading = false;
+      user.isFollowing = false;
+      visualElementsService.hideProgressBar();
+    });
+  };
 }
 
 angular.module('app').component('instagramUserList', {

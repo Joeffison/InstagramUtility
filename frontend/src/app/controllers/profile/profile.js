@@ -6257,11 +6257,13 @@ function ProfileController(instagramAPIService, visualElementsService,
     this.value = 0;
 
     angular.forEach(vm.instaUser.followers, function (follower) {
+      follower.metaIsLoading = false;
       follower.isFollower = true;
       follower.isFollowing = userIsIn(follower, vm.instaUser.followings);
     });
 
     angular.forEach(vm.instaUser.followings, function (following) {
+      following.metaIsLoading = false;
       following.isFollowing = true;
       following.isFollower = userIsIn(following, vm.instaUser.followers);
     });
@@ -6299,11 +6301,11 @@ function ProfileController(instagramAPIService, visualElementsService,
 
   this.notifyChild = function(action) {
     if (vm.actionHandlers.size > 0) {
-      if(vm.currentAction !== vm.actions.PROFILE) {
+      if (vm.currentAction !== vm.actions.PROFILE) {
         vm.actionHandlers.get(vm.currentAction)({action: 'close'});
       }
       vm.currentAction = action;
-      if(vm.currentAction !== vm.actions.PROFILE) {
+      if (vm.currentAction !== vm.actions.PROFILE) {
         vm.actionHandlers.get(vm.currentAction)({action: 'open'});
         visualElementsService.showProgressBar();
       }

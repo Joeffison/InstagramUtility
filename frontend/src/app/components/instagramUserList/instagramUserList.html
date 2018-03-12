@@ -7,14 +7,16 @@
         <span class="title truncate">{{user.username}}</span>
         <p>{{user.full_name}}</p>
 
-        <a class="secondary-content btn blue flow-text" ng-if="!user.isFollowing"
+        <a class="secondary-content btn blue flow-text" ng-class="user.metaIsLoading? 'loading' : ''"
+           ng-if="!user.isFollowing"
            ng-click="$ctrl.follow(user)">
-          Follow
+          Follow<circle-loader ng-if="user.metaIsLoading"></circle-loader>
         </a>
 
-        <a class="secondary-content btn white black-text flow-text" ng-if="user.isFollowing"
+        <a class="secondary-content btn white black-text flow-text" ng-class="user.metaIsLoading? 'loading' : ''"
+           ng-if="user.isFollowing"
            ng-click="$ctrl.unfollow(user)">
-          Following
+          Following<circle-loader ng-if="user.metaIsLoading"></circle-loader>
         </a>
       </li>
     </ul>
