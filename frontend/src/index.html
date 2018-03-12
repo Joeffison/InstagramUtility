@@ -3,13 +3,14 @@
   <head>
     <base href="/">
     <meta charset="utf-8">
-    <title>Instagram Utility</title>
+    <title>Joeffison's Instagram Utility</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" type="image/png" href="http://fountainjs.io/assets/imgs/fountain.png" />
+    <link rel="icon" type="image/png" href="assets/img/insta-logo.png" />
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="bower_components/mdi/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
 
     <!-- build:css({.tmp,src}) styles/vendor.css -->
     <!-- bower:css -->
@@ -25,9 +26,13 @@
 
   <body ng-app="app">
     <main-header></main-header>
+
     <main>
-      <ui-view></ui-view>
+      <div class="container">
+        <ui-view></ui-view>
+      </div>
     </main>
+
     <main-footer></main-footer>
 
     <!--Import jQuery before materialize.js-->

@@ -1,25 +1,55 @@
-<div class="row center-align col s4" ng-if="vm.instaUser !== undefined">
-  <p>
-    {{vm.instaUser.username}}
-  </p>
-  <p>
-    X posts {{vm.instaUser.followers.length}} followers {{vm.instaUser.followings.length}} following
-  </p>
+<div class="row left-align" ng-if="vm.instaUser !== undefined">
 
-  <div>
-    <span ng-click="vm.notifyChild(vm.actions.NOT_FOLLOWERS)">
-      {{vm.instaUser.notFollowers.length}} not followers
-    </span>
-    <span ng-click="vm.notifyChild(vm.actions.NOT_FOLLOWINGS)">
-      {{vm.instaUser.notFollowings.length}} not following
+  <div class="row">
+    <span class="col s4 offset-s4">
+      {{vm.instaUser.username}}
     </span>
   </div>
 
-  <instagram-user-list users="vm.instaUser.notFollowers" action-name="vm.actions.NOT_FOLLOWERS" title="'Not Followers'"
+  <div class="row">
+    <div class="col s2 offset-s4 left-align">
+      <span class="profile-item-text">
+       {{vm.instaUser.n_feed}} posts
+      </span>
+    </div>
+    <div class="col s2 left-align" ng-click="vm.notifyChild(vm.actions.FOLLOWERS)">
+      <span class="profile-item-text clickable">
+        {{vm.instaUser.n_followers}} followers
+      </span>
+    </div>
+    <div class="col s2 left-align" ng-click="vm.notifyChild(vm.actions.FOLLOWING)">
+      <span class="profile-item-text clickable">
+      {{vm.instaUser.n_followings}} following
+      </span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s2 offset-s6 left-align" ng-click="vm.notifyChild(vm.actions.NOT_FOLLOWERS)">
+      <span class="profile-item-text clickable">
+        {{vm.instaUser.notFollowers.length}} not followers
+      </span>
+    </div>
+    <div class="col s2 left-align" ng-click="vm.notifyChild(vm.actions.NOT_FOLLOWING)">
+      <span class="profile-item-text clickable">
+        {{vm.instaUser.notFollowings.length}} not following
+      </span>
+    </div>
+  </div>
+
+  <instagram-user-list users="vm.instaUser.followers" action-name="vm.actions.FOLLOWERS" action-title="'Followers'"
+                       parent-to-child-notification-registration="vm.followersComponentRegistration(handler)">
+  </instagram-user-list>
+
+  <instagram-user-list users="vm.instaUser.followings" action-name="vm.actions.FOLLOWING" action-title="'Following'"
+                       parent-to-child-notification-registration="vm.followingsComponentRegistration(handler)">
+  </instagram-user-list>
+
+  <instagram-user-list users="vm.instaUser.notFollowers" action-name="vm.actions.NOT_FOLLOWERS" action-title="'Not Followers'"
                        parent-to-child-notification-registration="vm.notFollowersComponentRegistration(handler)">
   </instagram-user-list>
 
-  <instagram-user-list users="vm.instaUser.notFollowings" action-name="vm.actions.NOT_FOLLOWINGS" title="'Not Following'"
+  <instagram-user-list users="vm.instaUser.notFollowings" action-name="vm.actions.NOT_FOLLOWING" action-title="'Not Following'"
                        parent-to-child-notification-registration="vm.notFollowingsComponentRegistration(handler)">
   </instagram-user-list>
 </div>

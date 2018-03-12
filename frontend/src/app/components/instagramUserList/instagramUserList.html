@@ -1,13 +1,21 @@
 <div ng-attr-id="{{'modal_' + $ctrl.actionName}}" class="modal modal-fixed-footer">
   <div class="modal-content">
-    <p class="modal-title">{{$ctrl.title}}</p>
+    <p class="modal-title">{{$ctrl.actionTitle}}</p>
     <ul class="collection">
       <li class="collection-item avatar" ng-repeat="user in $ctrl.users">
         <img ng-src="{{user.profile_pic_url}}" alt="" class="circle">
         <span class="title truncate">{{user.username}}</span>
         <p>{{user.full_name}}</p>
-        <a class="secondary-content btn blue flow-text" ng-if="!user.isFollowing">Follow</a>
-        <a class="secondary-content btn white black-text flow-text" ng-if="user.isFollowing">Following</a>
+
+        <a class="secondary-content btn blue flow-text" ng-if="!user.isFollowing"
+           ng-click="$ctrl.follow(user)">
+          Follow
+        </a>
+
+        <a class="secondary-content btn white black-text flow-text" ng-if="user.isFollowing"
+           ng-click="$ctrl.unfollow(user)">
+          Following
+        </a>
       </li>
     </ul>
   </div>

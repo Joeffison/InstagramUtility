@@ -10,20 +10,21 @@ from .models import InstagramModel
 from .serializers import InstagramSerializer
 
 
-@api_view(['GET', 'POST'])
+@api_view(['POST'])
 def model_list(request):
-  """
-  List all ML Models, or create a new one.
-  """
-  # TODO Remove password from serializer when this version is complete.
-  if request.method == 'GET':
-    models = InstagramModel.objects.all()
-    serializer = InstagramSerializer(models, many=True)
-    return JsonResponse(serializer.data, safe=False)
-
-  elif request.method == 'POST':
+  if request.method == 'POST':
     api = MyInstagramAPI(request.data['username'], request.data['password'])
     return JsonResponse(data=api.get_current_user_profile(), safe=False)
   return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
+@api_view(['POST'])
+def follow(request):
+  api = MyInstagramAPI(request.data['username'], request.data['password'])
+  api.follow(request.data['users'])
+  return JsonResponse(data=api.get_current_user_profile(), safe=False)
 
+@api_view(['POST'])
+def unfollow(request):
+  api = MyInstagramAPI(request.data['username'], request.data['password'])
+  api.unfollow(request.data['users'])
+  return JsonResponse(data=api.get_current_user_profile(), safe=False)

@@ -46,6 +46,14 @@ class MyInstagramAPI:
       self.followings = self.api.getTotalSelfFollowings()
     return self.followings
 
+  def follow(self, users_ids):
+    for to_follow in users_ids:
+      self.api.follow(to_follow)
+
+  def unfollow(self, users_ids):
+    for to_follow in users_ids:
+      self.api.unfollow(to_follow)
+
   @staticmethod
   def getUsernames(users):
     return [user['username'] for user in users]

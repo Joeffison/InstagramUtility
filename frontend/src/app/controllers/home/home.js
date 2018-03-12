@@ -1,10 +1,12 @@
-function HomeController(instagramAPIService, $state) {
-  var vm = this;
+function HomeController(instagramAPIService, visualElementsService,
+                        $state, $cookies) {
+  let vm = this;
 
   vm.username = '';
   vm.pwd = '';
 
   vm.login = function () {
+    visualElementsService.showProgressBar();
     instagramAPIService.login(vm.username, vm.pwd, function (response) {
       vm.user = response.data;
       $state.go('profile', {instaUser: vm.user});
@@ -14,5 +16,6 @@ function HomeController(instagramAPIService, $state) {
 }
 
 angular.module('app')
-  .controller('HomeController', ['instagramAPIService', '$state',
+  .controller('HomeController', ['instagramAPIService', 'visualElementsService',
+    '$state', '$cookies',
     HomeController]);

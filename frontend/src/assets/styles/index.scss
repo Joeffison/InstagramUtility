@@ -1,3 +1,5 @@
+$color-hover-primary: teal;
+
 body {
   display: flex;
   min-height: 100vh;
@@ -8,10 +10,40 @@ main {
   flex: 1 0 auto;
 }
 
-.instagram-login {
-  width: 25vw;
-  // background-color: white;
-  // border-radius: 10%;
+.black-text{
+  a {
+    color: black;
+
+    &:hover {
+      color: $color-hover-primary;
+    }
+  }
+}
+
+main-header {
+  .progress {
+    margin: 0 !important;
+  }
+}
+
+#insta-logo {
+  //height: 35px !important;
+  //width: 30px !important;
+  //background: url(assets/img/insta-sprites.png) -331px -430px;
+  background: url(assets/img/insta-sprites.png) -177px -264px;
+  height: 35px;
+  width: 176px;
+}
+
+.profile-item-text {
+  //margin-right: 40px;
+  &.clickable {
+    cursor: pointer;
+
+    &:hover {
+      color: $color-hover-primary;
+    }
+  }
 }
 
 .modal-title {

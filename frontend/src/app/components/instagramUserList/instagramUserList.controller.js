@@ -1,5 +1,5 @@
-function instagramUserList() {
-  var vm = this;
+function instagramUserListController(instagramAPIService, visualElementsService) {
+  let vm = this;
 
   this.$onInit = function() {
     this.parentToChildNotificationRegistration({
@@ -7,7 +7,9 @@ function instagramUserList() {
       actionName: this.actionName
     });
 
-    angular.element('.modal').modal();
+    angular.element('.modal').modal({
+      complete: () => visualElementsService.hideProgressBar()
+    });
   };
 
   this.processParentNotification = function(parentValue) {
@@ -25,15 +27,26 @@ function instagramUserList() {
         break;
     }
   };
+
+  this.follow = (user) => instagramAPIService.follow([user], function (response) {
+    user.isFollowing = true;
+    visualElementsService.hideProgressBar();
+  });
+
+  this.unfollow = (user) => instagramAPIService.unfollow([user], function (response) {
+    user.isFollowing = false;
+    visualElementsService.hideProgressBar();
+  });
 }
 
 angular.module('app').component('instagramUserList', {
   templateUrl: 'app/components/instagramUserList/instagramUserList.html',
-  controller: instagramUserList,
+  controller: ['instagramAPIService', 'visualElementsService',
+    instagramUserListController],
   bindings: {
     users: '<',
     actionName: '<',
-    title: '<',
+    actionTitle: '<',
     parentToChildNotificationRegistration: '&'
   }
 });
