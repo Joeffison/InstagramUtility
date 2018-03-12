@@ -21,7 +21,8 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: 'app/controllers/profile/profile.html',
       controller: 'ProfileController',
       controllerAs: 'vm',
-      params: { instaUser: null }
+      params: {
+        instaUser: null
+      }
     });
-
 }

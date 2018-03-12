@@ -1,14 +1,14 @@
 function circleLoaderController() {
-  let vm = this;
+  const vm = this;
 
-  this.$onInit = function() {
+  vm.$onInit = function () {
     this.parentToChildNotificationRegistration({
       handler: this.processParentNotification,
       actionName: this.actionName
     });
   };
 
-  this.processParentNotification = function(parentValue) {
+  vm.processParentNotification = function (parentValue) {
     switch (parentValue.action) {
       case 'open':
         vm.isOpen = true;

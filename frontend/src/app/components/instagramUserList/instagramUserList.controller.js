@@ -1,5 +1,5 @@
 function instagramUserListController(instagramAPIService, visualElementsService) {
-  let vm = this;
+  const vm = this;
 
   vm.$onInit = function () {
     this.parentToChildNotificationRegistration({
@@ -32,7 +32,7 @@ function instagramUserListController(instagramAPIService, visualElementsService)
   vm.follow = function (user) {
     user.metaIsLoading = true;
 
-    instagramAPIService.follow([user], function (response) {
+    instagramAPIService.follow([user], response => {
       user.metaIsLoading = false;
       user.isFollowing = true;
       visualElementsService.hideProgressBar();
@@ -42,7 +42,7 @@ function instagramUserListController(instagramAPIService, visualElementsService)
   vm.unfollow = function (user) {
     user.metaIsLoading = true;
 
-    instagramAPIService.unfollow([user], function (response) {
+    instagramAPIService.unfollow([user], response => {
       user.metaIsLoading = false;
       user.isFollowing = false;
       visualElementsService.hideProgressBar();

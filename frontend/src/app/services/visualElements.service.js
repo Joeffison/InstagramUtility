@@ -1,5 +1,5 @@
 function visualElementsService($http) {
-  let service = this;
+  const service = this;
 
   service.showProgressBar = () => angular.element('#progress-bar').addClass('progress');
   service.hideProgressBar = () => angular.element('#progress-bar').removeClass('progress');
