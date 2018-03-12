@@ -6,11 +6,7 @@ function HomeController(instagramAPIService, visualElementsService,
   vm.pwd = '';
 
   vm.login = function () {
-    visualElementsService.showProgressBar();
-    instagramAPIService.login(vm.username, vm.pwd, response => {
-      vm.user = response.data;
-      $state.go('profile', {instaUser: vm.user});
-    });
+    $state.go('profile', {cred: {username: vm.username, pwd: vm.pwd}});
   };
 }
 

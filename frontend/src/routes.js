@@ -22,7 +22,17 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       controller: 'ProfileController',
       controllerAs: 'vm',
       params: {
-        instaUser: null
+        cred: null
+      },
+      resolve: {
+
+        // A string value resolves to a service
+        resource: 'instagramAPIService',
+
+        // A function value resolves to the return value of the function
+        instaUser: function(resource, $stateParams){
+          return resource.login($stateParams.cred.username, $stateParams.cred.pwd);
+        }
       }
     });
 }

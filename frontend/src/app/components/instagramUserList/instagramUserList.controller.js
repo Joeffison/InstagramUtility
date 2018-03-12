@@ -7,7 +7,6 @@ function instagramUserListController(instagramAPIService, visualElementsService)
       actionName: this.actionName
     });
 
-    visualElementsService.hideProgressBar();
     angular.element('.modal').modal({
       complete: () => visualElementsService.hideProgressBar()
     });
