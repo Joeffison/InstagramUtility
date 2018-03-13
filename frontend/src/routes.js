@@ -3,7 +3,7 @@ angular
   .config(routesConfig);
 
 /** @ngInject */
-function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
+function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $transitionsProvider) {
   $locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider.otherwise('/');
 
@@ -30,9 +30,18 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         resource: 'instagramAPIService',
 
         // A function value resolves to the return value of the function
-        instaUser: function(resource, $stateParams){
-          return resource.login($stateParams.cred.username, $stateParams.cred.pwd);
+        instaUser: (resource, $stateParams) => {
+          if ($stateParams.cred) {
+            return resource.login($stateParams.cred.username, $stateParams.cred.pwd);
+          }
+          return null;
         }
       }
     });
+
+  $transitionsProvider.onBefore({}, transition => {
+    if ((!transition.from() || !transition.from().name) && transition.to().name !== 'home') {
+      return transition.router.stateService.target('home');
+    }
+  });
 }
