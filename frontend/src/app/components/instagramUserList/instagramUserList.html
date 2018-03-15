@@ -1,6 +1,6 @@
-<div ng-attr-id="{{'modal_' + $ctrl.actionName}}" class="modal modal-fixed-footer">
+<div ng-attr-id="{{'modal_' + $ctrl.actionName}}" class="modal modal-fixed-footer modal-followers">
+  <div class="valign-wrapper modal-title"><p>{{$ctrl.actionTitle}}</p></div>
   <div class="modal-content">
-    <p class="modal-title">{{$ctrl.actionTitle}}</p>
     <ul class="collection">
       <li class="collection-item avatar" ng-repeat="user in $ctrl.users">
         <img ng-src="{{user.profile_pic_url}}" alt="" class="circle">

@@ -59,9 +59,29 @@ main-header {
   }
 }
 
-.modal-title {
-  position: absolute;
-  top: 0;
-  font-weight: bolder;
-  border-bottom: solid 1px #dbdbdb;
+.modal-followers {
+  $header-height: 7vmax;
+
+  .modal-title {
+    position: absolute;
+    top: 0;
+    font-weight: bolder;
+    width: 100%;
+    padding-left: 5vw;
+
+    height: $header-height;
+    min-height: $header-height;
+    max-height: $header-height;
+  }
+
+  .modal-content {
+    padding: 0;
+    top: $header-height;
+    border-top: solid 2px #dbdbdb;
+    max-height: calc(100% - 56px - 7vmax) !important;
+  }
+
+  .collection {
+    border: 0;
+  }
 }
