@@ -1,6 +1,5 @@
 .tmp/
 coverage/
-dist/
 node_modules/
 bower_components/
 *.log
