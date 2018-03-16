@@ -82,5 +82,9 @@
       "no-undef": 0,
       "no-unused-vars": 0
     }
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "gzippo": "^0.2.0"
   }
 }
