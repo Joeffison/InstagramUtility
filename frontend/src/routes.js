@@ -12,7 +12,10 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $tr
       url: '/',
       templateUrl: 'app/controllers/home/home.html',
       controller: 'HomeController',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      params: {
+        loginFailed: false
+      }
     });
 
   $stateProvider

@@ -1,9 +1,9 @@
 function instagramAPIService(visualElementsService,
-                             $http, $cookies) {
+                             $http, $cookies, $state) {
   const service = this;
   const INSTA_API = 'http://localhost:8000/instagram/';
 
-  service.login = function (username, password, onSuccess) {
+  service.login = function (username, password, onSuccess, onError) {
     visualElementsService.showProgressBar();
     $cookies.put('username', username);
     $cookies.put('pwd', password);
@@ -17,6 +17,14 @@ function instagramAPIService(visualElementsService,
       }
 
       return response.data;
+    }, response => {
+      visualElementsService.hideProgressBar();
+
+      if (onError) {
+        onError(response);
+      }
+
+      $state.go('home', {loginFailed: true});
     });
   };
 
@@ -63,5 +71,5 @@ function instagramAPIService(visualElementsService,
 
 angular.module('app')
   .factory('instagramAPIService', ['visualElementsService',
-    '$http', '$cookies',
+    '$http', '$cookies', '$state',
     instagramAPIService]);

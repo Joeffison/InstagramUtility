@@ -1,10 +1,16 @@
 # https://github.com/LevPasha/Instagram-API-python
 # pip install -e git+https://github.com/LevPasha/Instagram-API-python.git#egg=InstagramAPI
 import imageio
+from rest_framework.exceptions import APIException
 
 imageio.plugins.ffmpeg.download()
 
 from InstagramAPI import InstagramAPI
+
+
+class LoginFailedException(APIException):
+  pass
+
 
 class MyInstagramAPI:
   def __init__(self, username, password):
@@ -13,7 +19,12 @@ class MyInstagramAPI:
 
     self.api = InstagramAPI(self.username, self.password)
     self.api.login()
-    self.user_id = self.api.username_id
+
+    try:
+      self.user_id = self.api.username_id
+    except AttributeError:
+      raise LoginFailedException()
+
     self.__clear()
 
   def get_current_user_profile(self):

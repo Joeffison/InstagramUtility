@@ -1,15 +1,15 @@
 <div class="row">
-  <div class="row center-align col s3">
+  <div class="row center-align col s5">
 
     <div class="input-field col s12">
       <i class="material-icons prefix">account_circle</i>
-      <input id="username" type="text" class="validate" ng-model="vm.username">
+      <input id="username" type="text" class="validate" required ng-model="vm.username">
       <label for="username">Username</label>
     </div>
 
     <div class="input-field col s12">
       <i class="material-icons prefix">visibility_off</i>
-      <input id="password" type="password" class="validate" ng-model="vm.pwd">
+      <input id="password" type="password" class="validate" required ng-model="vm.pwd">
       <label for="password">Password</label>
     </div>
 
@@ -17,5 +17,6 @@
       Login
       <i class="material-icons right">send</i>
     </a>
+    <p ng-show="vm.loginFailed" class="error-message">Invalid user or password.</p>
   </div>
 </div>
