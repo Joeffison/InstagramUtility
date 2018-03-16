@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from rest_framework import routers
+
+router = routers.DefaultRouter()
 
 urlpatterns = [
   url(r'^instagram/', include('application_instagram_api.urls')),
   url(r'^admin/', admin.site.urls),
+  url(r'^api/', include(router.urls)),
 ]

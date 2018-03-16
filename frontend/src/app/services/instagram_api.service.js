@@ -1,7 +1,7 @@
 function instagramAPIService(visualElementsService,
                              $http, $cookies, $state) {
   const service = this;
-  const INSTA_API = 'http://localhost:8000/instagram/';
+  const INSTA_API = 'https://instautil.herokuapp.com:8000/instagram/';
 
   service.login = function (username, password, onSuccess, onError) {
     visualElementsService.showProgressBar();
