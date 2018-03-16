@@ -25,7 +25,7 @@ SECRET_KEY = '+jzqnh=m7prqa_u2u!j!t9cw1pcpx^ya5u9y*h&azu&p*_62*q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['instautil.herokuapp.com']
 
 # Application definition
 
@@ -121,9 +121,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = (
+    '192.168.0.122:3000',
     '127.0.0.1:3000',
     'localhost:3000'
 )
