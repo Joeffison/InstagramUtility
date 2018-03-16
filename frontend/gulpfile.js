@@ -18,6 +18,7 @@ gulp.task('serve', gulp.series('inject', 'watch', 'browsersync'));
 gulp.task('serve:dist', gulp.series('default', 'browsersync:dist'));
 gulp.task('default', gulp.series('clean', 'build'));
 gulp.task('watch', watch);
+gulp.task('heroku', gulp.series('partials', gulp.parallel('inject', 'other'), 'build'));
 
 function reloadBrowserSync(cb) {
   browserSync.reload();
