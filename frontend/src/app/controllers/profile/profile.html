@@ -1,39 +1,56 @@
-<div class="row left-align" ng-if="vm.instaUser !== undefined">
+<div class="row left-align profile-page" ng-if="vm.instaUser !== undefined">
 
-  <div class="row">
-    <span class="col s4 offset-s4">
-      {{vm.instaUser.username}}
-    </span>
+  <div class="col s1 offset-s1">
+    <img class="profile-picture" ng-src="{{vm.instaUser.profile_picture}}">
   </div>
 
-  <div class="row">
-    <div class="col s2 offset-s4 left-align">
-      <span class="profile-item-text">
-       {{vm.instaUser.n_feed}} posts
+  <div class="col s10">
+    <div class="row">
+      <span class="col s4 offset-s3 profile-h1">
+        {{vm.instaUser.username}}
       </span>
     </div>
-    <div class="col s2 left-align" ng-click="vm.notifyChild(vm.actions.FOLLOWERS)">
-      <span class="profile-item-text clickable">
-        {{vm.instaUser.n_followers}} followers
-      </span>
-    </div>
-    <div class="col s2 left-align" ng-click="vm.notifyChild(vm.actions.FOLLOWING)">
-      <span class="profile-item-text clickable">
-      {{vm.instaUser.n_followings}} following
-      </span>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col s2 offset-s6 left-align" ng-click="vm.notifyChild(vm.actions.NOT_FOLLOWERS)">
-      <span class="profile-item-text clickable">
-        {{vm.instaUser.notFollowers.length}} not followers
-      </span>
+    <div class="row">
+      <div class="col s2 offset-s3 left-align">
+        <span class="profile-item-text">
+         <b>{{vm.instaUser.n_feed}}</b> posts
+        </span>
+      </div>
+      <div class="col s3 left-align" ng-click="vm.notifyChild(vm.actions.FOLLOWERS)">
+        <span class="profile-item-text clickable">
+          <b>{{vm.instaUser.n_followers}}</b> followers
+        </span>
+      </div>
+      <div class="col s2 left-align" ng-click="vm.notifyChild(vm.actions.FOLLOWING)">
+        <span class="profile-item-text clickable">
+        <b>{{vm.instaUser.n_followings}}</b> following
+        </span>
+      </div>
     </div>
-    <div class="col s2 left-align" ng-click="vm.notifyChild(vm.actions.NOT_FOLLOWING)">
-      <span class="profile-item-text clickable">
-        {{vm.instaUser.notFollowings.length}} not following
-      </span>
+
+    <div class="row">
+      <div class="col s3 offset-s5 left-align" ng-click="vm.notifyChild(vm.actions.NOT_FOLLOWERS)">
+        <span class="profile-item-text clickable">
+          <b>{{vm.instaUser.notFollowers.length}}</b> not followers
+        </span>
+      </div>
+      <div class="col s2 left-align" ng-click="vm.notifyChild(vm.actions.NOT_FOLLOWING)">
+        <span class="profile-item-text clickable">
+          <b>{{vm.instaUser.notFollowings.length}}</b> not following
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s9 offset-s3">
+        <span class="profile-item-text profile-h2">
+         {{vm.instaUser.full_name}}
+        </span>
+        <span class="profile-item-text">
+         {{vm.instaUser.biography}}
+        </span>
+      </div>
     </div>
   </div>
 
