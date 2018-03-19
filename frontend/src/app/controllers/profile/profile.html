@@ -54,6 +54,32 @@
     </div>
   </div>
 
+  <div class="col s12 post-div row">
+    <span class="col s1 offset-s5 active">
+      POSTS
+    </span>
+    <!--span class="col s1 offset-s1">
+      SAVED
+    </span-->
+  </div>
+
+  <div class="col s12">
+    <div class="row">
+      <div class="col s4" ng-repeat="post in vm.instaUser.feed.items">
+        <div class="squared-image"
+             ng-if="post.image_versions2 && post.image_versions2.candidates"
+             style="background-image: url({{post.image_versions2.candidates[0].url}});">
+        </div>
+
+        <!-- ng-repeat="image in post.carousel_media" -->
+        <div class="squared-image"
+             ng-if="post.carousel_media"
+             style="background-image: url({{post.carousel_media[0].image_versions2.candidates[0].url}});">
+        </div>
+      </div>
+    </div>
+  </div>
+
   <instagram-user-list users="vm.instaUser.followers" action-name="vm.actions.FOLLOWERS" action-title="'Followers'"
                        parent-to-child-notification-registration="vm.followersComponentRegistration(handler)">
   </instagram-user-list>

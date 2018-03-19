@@ -38,6 +38,7 @@ class MyInstagramAPI:
       'n_followings': self.get_n_followings(),
 
       # TO IMPROVE: Get Followers and Followings only when necessary
+      'feed': self.get_paginated_feed(),
       'followers': self.get_followers(),
       'followings': self.get_followings()
     }
@@ -83,6 +84,10 @@ class MyInstagramAPI:
     if not self.__feed:
       self.__feed = self.api.getTotalUserFeed(self.user_id)
     return self.__feed
+
+  def get_paginated_feed(self, maxid=''):
+    if self.api.getSelfUserFeed(maxid):
+      return self.api.LastJson
 
   def get_followers(self):
     if not self.__followers:
