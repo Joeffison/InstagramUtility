@@ -52,14 +52,55 @@ main-header {
   color: red;
 }
 
-.profile-item-text {
-  //margin-right: 40px;
-  &.clickable {
-    cursor: pointer;
+.profile-page {
+  $text-size: 16px;
+  margin-top: 7vh;
 
-    &:hover {
-      color: $color-hover-primary;
+  .profile-picture {
+    border-radius: 50%;
+  }
+
+  .profile-h1 {
+    font-size: $text-size * 2;
+  }
+
+  .profile-h2 {
+    font-size: $text-size;
+    font-weight: bold;
+  }
+
+  .profile-item-text {
+    white-space: nowrap;
+    font-size: $text-size;
+    //margin-right: 40px;
+
+    &.clickable {
+      cursor: pointer;
+
+      &:hover {
+        color: $color-hover-primary;
+      }
     }
+  }
+
+  .post-div {
+    font-weight: bold;
+    border-top: 1px solid #efefef;
+    color: #999;
+  }
+
+  .post-div > .active {
+    border-top: 1px solid #262626;
+    color: black !important;
+  }
+
+  .squared-image{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 22vw;
+    height: 22vw;
+    margin-bottom: 2vh;
   }
 }
 

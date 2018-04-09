@@ -30,32 +30,74 @@ class MyInstagramAPI:
   def get_current_user_profile(self):
     return {
       'username': self.username,
-      'n_feed': len(self.getFeed()),
-      'n_followers': len(self.getFollowers()),
-      'followers': self.getFollowers(),
-      'n_followings': len(self.getFollowings()),
-      'followings': self.getFollowings()
+      'full_name': self.get_full_name(),
+      'biography': self.get_biography(),
+      'profile_picture': self.get_profile_picture(),
+      'n_feed': self.get_n_feed(),
+      'n_followers': self.get_n_followers(),
+      'n_followings': self.get_n_followings(),
+
+      # TO IMPROVE: Get Followers and Followings only when necessary
+      'feed': self.get_paginated_feed(),
+      'followers': self.get_followers(),
+      'followings': self.get_followings()
     }
 
   def __clear(self):
-    self.feed = None
-    self.followers = None
-    self.followings = None
+    self.__full_info = None
+    self.__feed = None
+    self.__followers = None
+    self.__followings = None
 
-  def getFeed(self):
-    if not self.feed:
-      self.feed = self.api.getTotalUserFeed(self.user_id)
-    return self.feed
+  def __get_full_info(self):
+    if not self.__full_info and self.api.searchUsername(self.username):
+      self.__full_info = self.api.LastJson['user']
+    return self.__full_info
 
-  def getFollowers(self):
-    if not self.followers:
-      self.followers = self.api.getTotalSelfFollowers()
-    return self.followers
+  def __get_user_info_in_search(self, attribute, attribute_in_search=None):
+    if not hasattr(self, attribute):
+      attribute_in_search = attribute_in_search or attribute.replace('__', '')
+      value = self.__get_full_info()[attribute_in_search]
+      setattr(self, attribute, value)
 
-  def getFollowings(self):
-    if not self.followings:
-      self.followings = self.api.getTotalSelfFollowings()
-    return self.followings
+    return getattr(self, attribute)
+
+  def get_full_name(self):
+    return self.__get_user_info_in_search('__full_name')
+
+  def get_profile_picture(self):
+    return self.__get_user_info_in_search('__profile_picture', 'profile_pic_url')
+
+  def get_biography(self):
+    return self.__get_user_info_in_search('__biography')
+
+  def get_n_feed(self):
+    return self.__get_user_info_in_search('__n_feed', 'media_count')
+
+  def get_n_followers(self):
+    return self.__get_user_info_in_search('__n_followers', 'follower_count')
+
+  def get_n_followings(self):
+    return self.__get_user_info_in_search('__n_followings', 'following_count')
+
+  def get_feed(self):
+    if not self.__feed:
+      self.__feed = self.api.getTotalUserFeed(self.user_id)
+    return self.__feed
+
+  def get_paginated_feed(self, maxid=''):
+    if self.api.getSelfUserFeed(maxid):
+      return self.api.LastJson
+
+  def get_followers(self):
+    if not self.__followers:
+      self.__followers = self.api.getTotalSelfFollowers()
+    return self.__followers
+
+  def get_followings(self):
+    if not self.__followings:
+      self.__followings = self.api.getTotalSelfFollowings()
+    return self.__followings
 
   def follow(self, users_ids):
     for to_follow in users_ids:
